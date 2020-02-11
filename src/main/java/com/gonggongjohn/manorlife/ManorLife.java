@@ -1,5 +1,6 @@
 package com.gonggongjohn.manorlife;
 
+import com.gonggongjohn.manorlife.handlers.CapabilityHandler;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ReportedException;
@@ -31,6 +32,7 @@ public class ManorLife {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit(event);
+		CapabilityHandler.setupCapabilities();
 	}
 
 	@EventHandler
