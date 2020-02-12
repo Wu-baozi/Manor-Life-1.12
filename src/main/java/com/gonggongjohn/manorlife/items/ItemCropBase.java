@@ -5,9 +5,9 @@ import com.gonggongjohn.manorlife.handlers.ItemHandler;
 import com.gonggongjohn.manorlife.utils.IHasModel;
 import net.minecraft.item.Item;
 
-public class ItemVegetableBase extends Item implements IHasModel {
+public class ItemCropBase extends Item implements IHasModel {
 
-    public ItemVegetableBase(String name) {
+    public ItemCropBase(String name) {
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(ManorLife.tabManorLife);

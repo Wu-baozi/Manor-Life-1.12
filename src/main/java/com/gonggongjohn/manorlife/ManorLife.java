@@ -29,6 +29,8 @@ public class ManorLife {
 	@SidedProxy(clientSide = "com.gonggongjohn.manorlife.ClientProxy", serverSide = "com.gonggongjohn.manorlife.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static final CreativeTabs tabManorLife = new ManorLifeTab();
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit(event);
