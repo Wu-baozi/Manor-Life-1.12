@@ -39,6 +39,7 @@ public class BlockMill extends BlockContainer implements IHasModel{
         return false;
     }
 
+
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;

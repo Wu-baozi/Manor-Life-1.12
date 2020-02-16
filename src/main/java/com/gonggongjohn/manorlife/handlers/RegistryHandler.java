@@ -25,6 +25,7 @@ public class RegistryHandler {
     public static void onBlockRegister(RegistryEvent.Register<Block> event){
         event.getRegistry().registerAll(BlockHandler.blocks.toArray(new Block[0]));
         GameRegistry.registerTileEntity(TEMill.class, new ResourceLocation(ManorLife.MODID, "te_mill"));
+        ClientRegistry.bindTileEntitySpecialRenderer(TEMill.class, new RenderMill());
     }
 
     @SubscribeEvent
@@ -39,6 +40,5 @@ public class RegistryHandler {
                 ((IHasModel)block).registerModel();
             }
         }
-        ClientRegistry.bindTileEntitySpecialRenderer(TEMill.class, new RenderMill());
     }
 }

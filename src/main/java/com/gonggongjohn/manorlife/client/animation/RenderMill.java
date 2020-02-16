@@ -32,12 +32,15 @@ public class RenderMill extends TileEntitySpecialRenderer<TEMill> {
 
         GlStateManager.pushMatrix();
         GlStateManager.enableRescaleNormal();
-        GlStateManager.translate((float)x, (float)y + 1.0F, (float)z + 1.0F);
+        GlStateManager.translate((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
         GlStateManager.scale(1.0F, -1.0F, -1.0F);
-        GlStateManager.translate(0.5F, 0.5F, 0.5F);
-        GlStateManager.translate(-0.5F, -0.5F, -0.5F);
+        //GlStateManager.translate(0.5F, 0.5F, 0.5F);
+        //GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 
-        model.mill.rotateAngleY = partialTicks % (2 * (float)Math.PI);
+        float f = te.prevRotationAngle + (te.rotationAngle - te.prevRotationAngle) * partialTicks;
+        f = 1.0F - f;
+        f = 1.0F - f * f * f;
+        model.mill.rotateAngleY = -(f * ((float)Math.PI / 2F));
         model.renderAll();
         GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();

@@ -1,7 +1,10 @@
 package com.gonggongjohn.manorlife;
 
+import com.gonggongjohn.manorlife.client.animation.EmptyStateMapper;
+import com.gonggongjohn.manorlife.handlers.BlockHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.IThreadListener;
@@ -15,6 +18,7 @@ public class ClientProxy extends CommonProxy{
     @Override
 	public void preInit(FMLPreInitializationEvent event){
     	super.preInit(event);
+    	ModelLoader.setCustomStateMapper(BlockHandler.blockMill, new EmptyStateMapper());
     }
 
     @Override
