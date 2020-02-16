@@ -1,12 +1,18 @@
 package com.gonggongjohn.manorlife.handlers;
 
+import com.gonggongjohn.manorlife.ManorLife;
+import com.gonggongjohn.manorlife.client.animation.RenderMill;
+import com.gonggongjohn.manorlife.tile.TEMill;
 import com.gonggongjohn.manorlife.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
@@ -18,6 +24,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onBlockRegister(RegistryEvent.Register<Block> event){
         event.getRegistry().registerAll(BlockHandler.blocks.toArray(new Block[0]));
+        GameRegistry.registerTileEntity(TEMill.class, new ResourceLocation(ManorLife.MODID, "te_mill"));
     }
 
     @SubscribeEvent
@@ -32,5 +39,6 @@ public class RegistryHandler {
                 ((IHasModel)block).registerModel();
             }
         }
+        ClientRegistry.bindTileEntitySpecialRenderer(TEMill.class, new RenderMill());
     }
 }
