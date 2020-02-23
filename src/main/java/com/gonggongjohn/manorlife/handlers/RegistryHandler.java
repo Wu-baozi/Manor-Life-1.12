@@ -2,7 +2,9 @@ package com.gonggongjohn.manorlife.handlers;
 
 import com.gonggongjohn.manorlife.ManorLife;
 import com.gonggongjohn.manorlife.client.animation.RenderMill;
+import com.gonggongjohn.manorlife.client.animation.RenderStoneMill;
 import com.gonggongjohn.manorlife.tile.TEMill;
+import com.gonggongjohn.manorlife.tile.TEStoneMill;
 import com.gonggongjohn.manorlife.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -25,7 +27,9 @@ public class RegistryHandler {
     public static void onBlockRegister(RegistryEvent.Register<Block> event){
         event.getRegistry().registerAll(BlockHandler.blocks.toArray(new Block[0]));
         GameRegistry.registerTileEntity(TEMill.class, new ResourceLocation(ManorLife.MODID, "te_mill"));
+        GameRegistry.registerTileEntity(TEStoneMill.class, new ResourceLocation(ManorLife.MODID, "te_stoneMill"));
         ClientRegistry.bindTileEntitySpecialRenderer(TEMill.class, new RenderMill());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEStoneMill.class, new RenderStoneMill());
     }
 
     @SubscribeEvent

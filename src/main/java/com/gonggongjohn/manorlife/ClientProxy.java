@@ -19,6 +19,7 @@ public class ClientProxy extends CommonProxy{
 	public void preInit(FMLPreInitializationEvent event){
     	super.preInit(event);
     	ModelLoader.setCustomStateMapper(BlockHandler.blockMill, new EmptyStateMapper());
+    	ModelLoader.setCustomStateMapper(BlockHandler.blockStoneMill, new EmptyStateMapper());
     }
 
     @Override

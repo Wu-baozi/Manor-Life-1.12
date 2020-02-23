@@ -1,5 +1,6 @@
 item.soybean.name=Soybean
 
-tile.mill.name=Mill
-
 itemGroup.manorlifetab=Manor Life
+
+tile.mill.name=Mill
+tile.stone_mill.name=stone mill
