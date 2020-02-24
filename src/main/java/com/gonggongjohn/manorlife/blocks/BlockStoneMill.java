@@ -15,6 +15,7 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -23,8 +24,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class BlockStoneMill extends BlockContainer implements IHasModel {
+	
     public final String name = "stone_mill";
-    
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockStoneMill() {
@@ -71,8 +72,8 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
     }
 
     @Nullable
-    public ILockableContainer getLockableContainer(World worldIn, BlockPos pos)
-    {
+    public ILockableContainer getLockableContainer(World worldIn, BlockPos pos) {
+    	
         return this.getContainer(worldIn, pos, false);
     }
     
@@ -81,8 +82,8 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
 
         TileEntity tileentity = worldIn.getTileEntity(pos);
         
-        if (!(tileentity instanceof TEStoneMill))
-        {
+        if (!(tileentity instanceof TEStoneMill)) {
+        	
             return null;
         }
         else {
@@ -99,4 +100,10 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
     	
         ManorLife.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
+	
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
 }

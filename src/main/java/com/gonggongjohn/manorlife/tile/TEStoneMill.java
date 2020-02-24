@@ -1,4 +1,5 @@
 package com.gonggongjohn.manorlife.tile;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -35,6 +36,7 @@ public class TEStoneMill extends TileEntity implements ITickable, ILockableConta
             return true;
         }
         else {
+        	
             return super.receiveClientEvent(id, type);
         }
     }
@@ -43,19 +45,19 @@ public class TEStoneMill extends TileEntity implements ITickable, ILockableConta
     {
         if (!player.isSpectator())
         {
-            if (this.numPlayersUsing < 0)
-            {
+            if (this.numPlayersUsing < 0) {
+            	
                 this.numPlayersUsing = 0;
             }
 
-            ++this.numPlayersUsing;
+            this.numPlayersUsing++;
             this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
             this.world.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
         }
     }
 
-    public void closeInventory(EntityPlayer player)
-    {
+    public void closeInventory(EntityPlayer player) {
+    	
         this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
         this.world.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
     }
@@ -81,13 +83,13 @@ public class TEStoneMill extends TileEntity implements ITickable, ILockableConta
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 

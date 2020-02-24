@@ -13,8 +13,6 @@ public class RenderStoneMill extends TileEntitySpecialRenderer<TEStoneMill> {
 	
     private static final ResourceLocation TEXTURE = new ResourceLocation(ManorLife.MODID, "textures/blocks/block_stone_rock.png");
     private final ModelStoneMill MODEL = new ModelStoneMill();
-    
-    public static boolean active = false;
 
     @Override
     public void render(TEStoneMill te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
