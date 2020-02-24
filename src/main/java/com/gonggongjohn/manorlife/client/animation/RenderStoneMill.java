@@ -13,6 +13,8 @@ public class RenderStoneMill extends TileEntitySpecialRenderer<TEStoneMill> {
 	
     private static final ResourceLocation TEXTURE = new ResourceLocation(ManorLife.MODID, "textures/blocks/block_stone_rock.png");
     private final ModelStoneMill MODEL = new ModelStoneMill();
+    
+    public static boolean active = false;
 
     @Override
     public void render(TEStoneMill te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -38,10 +40,10 @@ public class RenderStoneMill extends TileEntitySpecialRenderer<TEStoneMill> {
         GlStateManager.translate((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
         GlStateManager.scale(1.0F, -1.0F, -1.0F);
         //GlStateManager.translate(0.5F, 0.5F, 0.5F);
-        //GlStateManager.translate(-0.5F, -0.5F, -0.5F);
+        //GlStateManager.translate(-0.5F, -0.5F, -0.5F);     
 
         float f = te.prevRotationAngle + (te.rotationAngle - te.prevRotationAngle) * partialTicks;
-        f = 1.4F - f;
+        f = 1.6F - f;
         f = 2.75F - f * f * f;
         model.stoneMillTop.rotateAngleY = - (f * ((float)Math.PI / 2F));
         model.renderAll();
