@@ -81,7 +81,7 @@ public class BlockStoneMillDone extends BlockContainer implements IHasModel {
     	
     	ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
     	   
-        if(playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemHandler.soybean || playerIn.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemHandler.soybean) {
+        if(playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemHandler.bottle_empty || playerIn.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemHandler.bottle_empty) {
         	
         	this.setState(false, worldIn, pos);
         }

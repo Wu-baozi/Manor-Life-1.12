@@ -1,7 +1,10 @@
 package com.gonggongjohn.manorlife.tile;
 
+import com.gonggongjohn.manorlife.handlers.BlockHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +18,7 @@ public class TEStoneMillActing extends TileEntity implements ITickable, ILockabl
     public float prevRotationAngle = 0F;
     public float rotationAngle = 0F;
     public int numPlayersUsing;
+    public int nbActing;
     
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -62,6 +66,14 @@ public class TEStoneMillActing extends TileEntity implements ITickable, ILockabl
     
     @Override
     public void update() {
+    	
+    	if(this.nbActing > 3) {
+    		
+    		this.nbActing = 0;
+    		
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            world.setBlockState(pos, BlockHandler.blockStoneMillDone.getDefaultState());
+    	}
 
         if(this.numPlayersUsing > 0) {
         	
@@ -71,6 +83,8 @@ public class TEStoneMillActing extends TileEntity implements ITickable, ILockabl
 	        	this.prevRotationAngle = 0.0F;
 	            this.rotationAngle = 0.0F; 
 	            this.numPlayersUsing = 0;
+	            
+	            this.nbActing++;
 	        }
 	        else {
 	        	
