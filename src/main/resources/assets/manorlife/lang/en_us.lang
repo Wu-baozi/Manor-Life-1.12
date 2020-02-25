@@ -4,3 +4,5 @@ itemGroup.manorlifetab=Manor Life
 
 tile.mill.name=Mill
 tile.stone_mill.name=stone mill
+tile.stone_mill_acting.name=stone mill acting
+tile.stone_mill_done.name=stone mill done

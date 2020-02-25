@@ -3,8 +3,12 @@ package com.gonggongjohn.manorlife.handlers;
 import com.gonggongjohn.manorlife.ManorLife;
 import com.gonggongjohn.manorlife.client.animation.RenderMill;
 import com.gonggongjohn.manorlife.client.animation.RenderStoneMill;
+import com.gonggongjohn.manorlife.client.animation.RenderStoneMillActing;
+import com.gonggongjohn.manorlife.client.animation.RenderStoneMillDone;
 import com.gonggongjohn.manorlife.tile.TEMill;
 import com.gonggongjohn.manorlife.tile.TEStoneMill;
+import com.gonggongjohn.manorlife.tile.TEStoneMillActing;
+import com.gonggongjohn.manorlife.tile.TEStoneMillDone;
 import com.gonggongjohn.manorlife.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -28,8 +32,12 @@ public class RegistryHandler {
         event.getRegistry().registerAll(BlockHandler.blocks.toArray(new Block[0]));
         GameRegistry.registerTileEntity(TEMill.class, new ResourceLocation(ManorLife.MODID, "te_mill"));
         GameRegistry.registerTileEntity(TEStoneMill.class, new ResourceLocation(ManorLife.MODID, "te_stoneMill"));
+        GameRegistry.registerTileEntity(TEStoneMillActing.class, new ResourceLocation(ManorLife.MODID, "te_stoneMillAction"));
+        GameRegistry.registerTileEntity(TEStoneMillDone.class, new ResourceLocation(ManorLife.MODID, "te_stoneMillDone"));
         ClientRegistry.bindTileEntitySpecialRenderer(TEMill.class, new RenderMill());
         ClientRegistry.bindTileEntitySpecialRenderer(TEStoneMill.class, new RenderStoneMill());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEStoneMillActing.class, new RenderStoneMillActing());
+        ClientRegistry.bindTileEntitySpecialRenderer(TEStoneMillDone.class, new RenderStoneMillDone());
     }
 
     @SubscribeEvent

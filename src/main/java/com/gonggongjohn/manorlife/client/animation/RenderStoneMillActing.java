@@ -1,7 +1,7 @@
 package com.gonggongjohn.manorlife.client.animation;
 
 import com.gonggongjohn.manorlife.ManorLife;
-import com.gonggongjohn.manorlife.tile.TEStoneMill;
+import com.gonggongjohn.manorlife.tile.TEStoneMillActing;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -9,19 +9,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderStoneMill extends TileEntitySpecialRenderer<TEStoneMill> {
+public class RenderStoneMillActing extends TileEntitySpecialRenderer<TEStoneMillActing> {
 	
     private static final ResourceLocation TEXTURE = new ResourceLocation(ManorLife.MODID, "textures/blocks/stone_mill.png");
-    private final ModelStoneMill MODEL = new ModelStoneMill();
+    private final ModelStoneMillActing MODEL = new ModelStoneMillActing();
 
     @Override
-    public void render(TEStoneMill te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TEStoneMillActing te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     	
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
 
-        ModelStoneMill model = MODEL;
+        ModelStoneMillActing model = MODEL;
         if(destroyStage >= 0) {
         	
             this.bindTexture(DESTROY_STAGES[destroyStage]);
@@ -41,7 +41,7 @@ public class RenderStoneMill extends TileEntitySpecialRenderer<TEStoneMill> {
         float f = te.prevRotationAngle + (te.rotationAngle - te.prevRotationAngle) * partialTicks;
         f = 1.6F - f;
         f = 2.75F - f * f * f;
-        model.stoneMillTop.rotateAngleY = - (f * ((float)Math.PI / 2F));
+        model.stoneMillActingTop.rotateAngleY = - (f * ((float)Math.PI / 2F));
         model.renderAll();
         
         GlStateManager.disableRescaleNormal();

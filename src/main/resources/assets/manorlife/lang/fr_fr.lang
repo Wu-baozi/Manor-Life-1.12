@@ -3,4 +3,6 @@ item.soybean.name=黄豆
 itemGroup.manorlifetab=庄园人生
 
 tile.mill.name=石磨
-tile.stone_mill.name=another 石磨
+tile.stone_mill.name=石磨
+tile.stone_mill_acting.name=石磨(工作中)
+tile.stone_mill_done.name=石磨(完成)

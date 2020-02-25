@@ -10,7 +10,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.LockCode;
 
-public class TEStoneMill extends TileEntity implements ITickable, ILockableContainer {
+public class TEStoneMillActing extends TileEntity implements ITickable, ILockableContainer {
 	
     public float prevRotationAngle = 0F;
     public float rotationAngle = 0F;
