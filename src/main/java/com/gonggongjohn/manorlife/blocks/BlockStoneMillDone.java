@@ -1,12 +1,9 @@
 package com.gonggongjohn.manorlife.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
 import com.gonggongjohn.manorlife.ManorLife;
 import com.gonggongjohn.manorlife.handlers.BlockHandler;
 import com.gonggongjohn.manorlife.handlers.ItemHandler;
-import com.gonggongjohn.manorlife.tile.TEStoneMill;
+import com.gonggongjohn.manorlife.tile.TEStoneMillDone;
 import com.gonggongjohn.manorlife.utils.IHasModel;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
@@ -35,13 +32,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockStoneMill extends BlockContainer implements IHasModel {
-	
-    public final String name = "stone_mill";
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    private boolean isActing;
+import java.util.Random;
 
-    public BlockStoneMill(boolean isActing) {
+import javax.annotation.Nullable;
+
+public class BlockStoneMillDone extends BlockContainer implements IHasModel {
+	
+    public final String name = "stone_mill_done";
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    private boolean isDone;
+
+    public BlockStoneMillDone(boolean isDone) {
     	
         super(Material.ROCK);
         this.setUnlocalizedName(name);
@@ -50,7 +51,7 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
         this.setCreativeTab(ManorLife.tabManorLife);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         
-        this.isActing = isActing;
+        this.isDone = isDone;
         
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
@@ -72,31 +73,27 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
     	
-        return new TEStoneMill();
+        return new TEStoneMillDone();
     }
     
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-
-    	ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
     	
-        if(playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemHandler.soybean || playerIn.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemHandler.soybean) {
+    	ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
+    	   
+        if(playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemHandler.bottle_empty || playerIn.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemHandler.bottle_empty) {
         	
-        	this.setState(true, worldIn, pos);
+        	this.setState(false, worldIn, pos);
         }
         else {
         	
-        	//这个GUIChest没懂原理所以不会改，微露先看一下，运行到这一步会打开身上的背包界面（0.1s）
         	playerIn.displayGUIChest(ilockablecontainer);
-        	//我加了这个用来关闭GUI，的确不会出现闪烁的背包GUI界面了，但是十字准星会有0.1s变成鼠标，吐血了
         	playerIn.closeScreen();
-
             if(!worldIn.isRemote) {
 
             	//playerIn.displayGUIChest(ilockablecontainer);
             }
         }
-
         return true;
     }
 
@@ -111,16 +108,16 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
 
         TileEntity tileentity = worldIn.getTileEntity(pos);
         
-        if (!(tileentity instanceof TEStoneMill)) {
+        if (!(tileentity instanceof TEStoneMillDone)) {
         	
             return null;
         }
         else {
 
-            ILockableContainer ilockablecontainer = (TEStoneMill)tileentity;
+            ILockableContainer ilockablecontainer = (TEStoneMillDone)tileentity;
 
             TileEntity anothorTileEntity = worldIn.getTileEntity(pos);
-            ilockablecontainer = new InventoryLargeChest("", null, (TEStoneMill)anothorTileEntity);
+            ilockablecontainer = new InventoryLargeChest("", null, (TEStoneMillDone)anothorTileEntity);
             return ilockablecontainer;
         }
 	}
@@ -143,8 +140,8 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
 	
     private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state) {
     	
-        if (!worldIn.isRemote) {
-        	
+    	if (!worldIn.isRemote) {
+    		
             IBlockState iblockstate = worldIn.getBlockState(pos.north());
             IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
             IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
@@ -174,11 +171,11 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
 	
     @SideOnly(Side.CLIENT)
     //@SuppressWarnings("incomplete-switch")
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
-    {
-    	/*
-        if (this.isActing)
-        {
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    	
+        if (this.isDone) {
+        	
+        	/*
             EnumFacing enumfacing = (EnumFacing)stateIn.getValue(FACING);
             double d0 = (double)pos.getX() + 0.5D;
             double d1 = (double)pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
@@ -204,27 +201,26 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
                     worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
             }
+            */
         }
-        */
     }
 	
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    	
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
     
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-    {
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    	
         worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
 
-        this.setDefaultFacing(worldIn, pos, state);
-        if (stack.hasDisplayName())
-        {
+        if (stack.hasDisplayName()) {
+        	
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TEStoneMill)
-            {
-                ((TEStoneMill)tileentity).setCustomInventoryName(stack.getDisplayName());
+            if (tileentity instanceof TEStoneMillDone) {
+            	
+                ((TEStoneMillDone)tileentity).setCustomInventoryName(stack.getDisplayName());
             }
         }
     }
@@ -234,8 +230,7 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
         return new BlockStateContainer(this, new IProperty[] {FACING});
     }
     
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
         super.breakBlock(worldIn, pos, state);
     }
@@ -252,7 +247,7 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
     
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(BlockHandler.blockStoneMill);
+        return new ItemStack(BlockHandler.blockStoneMillDone);
     }
 	
     public int getMetaFromState(IBlockState state)
@@ -260,18 +255,18 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
         return ((EnumFacing)state.getValue(FACING)).getIndex();
     }
     
-    public void setState(boolean isActing, World worldIn, BlockPos pos)
+    public void setState(boolean isDone, World worldIn, BlockPos pos)
     {
         //IBlockState iblockstate = worldIn.getBlockState(pos);
         TileEntity tileentity = worldIn.getTileEntity(pos);
 
-        if (isActing) {
+        if (isDone) {
 
-        	worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
-            worldIn.setBlockState(pos, BlockHandler.blockStoneMillActing.getDefaultState());
         }
         else {
 
+            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
+            worldIn.setBlockState(pos, BlockHandler.blockStoneMill.getDefaultState());
         }
 
         if (tileentity != null)
@@ -297,8 +292,4 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
     {
         return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
     }
-
-	public boolean isActing() {
-		return isActing;
-	}
 }

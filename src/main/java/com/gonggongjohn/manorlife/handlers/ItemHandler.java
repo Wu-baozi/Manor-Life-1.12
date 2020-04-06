@@ -10,4 +10,8 @@ public class ItemHandler {
     public static final List<Item> items = new ArrayList<Item>();
 
     public static final Item soybean = new ItemCropBase("soybean");
+    
+    //随便写的
+    public static final Item bottle_empty = new ItemCropBase("bottle_empty");
+    public static final Item bottle_soybeanMilk = new ItemCropBase("bottle_soybean_milk");
 }

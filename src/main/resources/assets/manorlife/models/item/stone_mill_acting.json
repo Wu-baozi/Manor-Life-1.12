@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "manorlife:blocks/stone_mill_texture"
+    "layer0": "manorlife:blocks/block_stone_rock"
   }
 }
